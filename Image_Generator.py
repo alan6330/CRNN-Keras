@@ -67,8 +67,8 @@ class TextImageGenerator:
             inputs = {
                 'the_input': X_data,  # (bs, 128, 64, 1)
                 'the_labels': Y_data,  # (bs, 8)
-                'input_length': input_length,  # (bs, 1) -> 모든 원소 value = 30
-                'label_length': label_length  # (bs, 1) -> 모든 원소 value = 8
+                'input_length': input_length,  # (bs, 1) -> 모든 원소 value = 30  其中30的计算是img_w // downsample_factor - 2，downsample_factor表示模型的下采样数，-2是因为前两个序列不取，代表最后输入的序列的长度
+                'label_length': label_length  # (bs, 1) -> 모든 원소 value = 8 代表输入的序列的文本的长度，长度大小不一，但是有最大的长度的限制
             }
             outputs = {'ctc': np.zeros([self.batch_size])}   # (bs, 1) -> 모든 원소 0
             yield (inputs, outputs)
